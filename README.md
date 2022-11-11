@@ -69,8 +69,8 @@ Updated version of Hive Helsinkis project libft
 - ft_tolower.c
 - ft_toupper.c
   
-  - get_next_line.c (see [get_next_line](https://github.com/tlahin/get_next_line))
+- get_next_line.c (see [get_next_line](https://github.com/tlahin/get_next_line))
   
-  - printf (see [ft_printf](https://github.com/tlahin/ft_printf))
+- printf (see [ft_printf](https://github.com/tlahin/ft_printf))
   
   Subject: [libft.en.pdf](https://github.com/tlahin/libft/files/9993610/libft.en.pdf)

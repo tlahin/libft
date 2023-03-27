@@ -71,7 +71,7 @@ void		ft_putstr_fd(char const *s, int fd);
 void		ft_putendl_fd(char const *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
 size_t		ft_intlen(int i);
-int			ft_srqt(int x);
+int	        ft_sqrt(int x);
 char		*ft_itoa(int i);
 int			ft_intlen_max(uintmax_t nbr);
 char		*ft_itoa_uintmax(uintmax_t number);

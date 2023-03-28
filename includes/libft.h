@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h>
-# include "ft_printf/includes/ft_printf.h"
+# include "../ft_printf/includes/ft_printf.h"
 
 void		ft_putchar(char c);
 void		ft_putnbr(int n);

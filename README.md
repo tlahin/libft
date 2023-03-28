@@ -6,8 +6,7 @@ Updated version of Hive Helsinkis project libft
 - ft_abs.c
 - ft_atoi.c
 - ft_bzero.c
-- ft_- ftoa.c
-- ft_- ftoa_helper.c
+- ft_ftoa.c
 - ft_intlen.c
 - ft_intlen_max.c
 - ft_isalnum.c

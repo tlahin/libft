@@ -12,6 +12,7 @@
 
 NAME = libft.a
 
+SRCS_DIR = ./srcs/
 SRCS =	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c \
 	ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_toupper.c \
 	ft_memalloc.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c \
@@ -26,7 +27,7 @@ SRCS =	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c \
 	get_next_line.c ft_sqrt.c ft_intlen.c ft_strndup.c ft_str_toupper.c \
 	ft_itoa_base.c ft_number_size.c ft_number_size_base.c ft_powl.c \
 
-PRINTF_INCS = -I. -I./ft_printf/includes
+INCS = -I./includes -I./ft_printf/includes
 PRINTF_DIR = ft_printf/sources/
 
 PRINTF_SRCS =	$(PRINTF_DIR)ft_printf.c \
@@ -60,7 +61,7 @@ FLAGS = -Wall -Werror -Wextra
 all : $(NAME)
 
 $(NAME) :
-	@gcc -c $(FLAGS) $(PRINTF_INCS) $(SRCS) $(PRINTF_SRCS)
+	@gcc -c $(FLAGS) $(INCS) $(addprefix $(SRCS_DIR), $(SRCS)) $(PRINTF_SRCS)
 	@ar rcs $(NAME) $(OBJS) $(PRINTF_OBJS)
 
 clean :

@@ -70,12 +70,12 @@ msg_compiling :
 	@echo ${CYAN}"Building the library.. $(NAME)${RESET}"
 
 clean :
-	@echo ${RED}"Removing object directory & files...${RESET}"
+	@echo ${RED}"Removing object files...${RESET}"
 	@rm -f $(OBJS) $(PRINTF_OBJS)
-	@rmdir $(OBJS_DIR)
 
 fclean : clean
 	@echo ${RED}"Removing $(NAME)${RESET}"
+	@rmdir $(OBJS_DIR)
 	@rm -f $(NAME)
 
 re : fclean all

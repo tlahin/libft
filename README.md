@@ -28,7 +28,7 @@ make && make clean
 To use the library functions in your code, simply include its header:
 
 ```C
-#include "ft_printf.h"
+#include "libft.h"
 ```
 
   

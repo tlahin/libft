@@ -12,7 +12,7 @@
 
 NAME = libft.a
 
-SRCS_DIR = ./srcs/
+SRCS_DIR = srcs/
 SRCS =	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c \
 	ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_toupper.c \
 	ft_memalloc.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c \
@@ -26,48 +26,56 @@ SRCS =	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c \
 	ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c \
 	get_next_line.c ft_sqrt.c ft_intlen.c ft_strndup.c ft_str_toupper.c \
 	ft_itoa_base.c ft_number_size.c ft_number_size_base.c ft_powl.c \
+	ft_is_prime.c ft_next_prime.c
 
-INCS = -I./includes -I./ft_printf/includes
-PRINTF_DIR = ft_printf/sources/
+PRINTF_DIR = ft_printf/srcs/
+PRINTF_SRCS =	ft_printf.c get_modifiers.c \
+	utilities_data.c utilities_1.c \
+	printer.c check.c print_alternative.c \
+	print_char.c print_str.c print_pointer.c \
+	print_integer.c print_octal.c \
+	print_hex.c print_unsigned.c \
+	print_float.c print_else.c \
+	padding.c caster.c max.c
 
-PRINTF_SRCS =	$(PRINTF_DIR)ft_printf.c \
-	$(PRINTF_DIR)get_modifiers.c \
-	$(PRINTF_DIR)utilities_data.c \
-	$(PRINTF_DIR)utilities_1.c \
-	$(PRINTF_DIR)printer.c \
-	$(PRINTF_DIR)check.c \
-	$(PRINTF_DIR)print_alternative.c \
-	$(PRINTF_DIR)print_char.c \
-	$(PRINTF_DIR)print_str.c \
-	$(PRINTF_DIR)print_pointer.c \
-	$(PRINTF_DIR)print_integer.c \
-	$(PRINTF_DIR)print_octal.c \
-	$(PRINTF_DIR)print_hex.c \
-	$(PRINTF_DIR)print_unsigned.c \
-	$(PRINTF_DIR)print_float.c \
-	$(PRINTF_DIR)print_else.c \
-	$(PRINTF_DIR)padding.c \
-	$(PRINTF_DIR)caster.c \
-	$(PRINTF_DIR)max.c
+OBJS_DIR = objs/
+OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
+PRINTF_OBJS = $(addprefix $(OBJS_DIR), $(PRINTF_SRCS:.c=.o))
 
-OBJS = $(SRCS:.c=.o)
-PRINTF_OBJS = ft_printf.o get_modifiers.o utilities_data.o utilities_1.o \
-	printer.o check.o print_alternative.o print_char.o print_str.o \
-	print_pointer.o print_integer.o print_octal.o print_hex.o \
-	print_unsigned.o print_float.o print_else.o padding.o caster.o max.o
+INCLUDES = -I ./includes -I ./ft_printf/includes
+CFLAGS = -Wall -Werror -Wextra
+CC = gcc
 
-FLAGS = -Wall -Werror -Wextra
+#COLORS:
+GREEN := '\033[1;3;32m'
+CYAN := '\033[2;3;36m'
+RED := '\033[2;3;31m'
+RESET := \033[0m
 
 all : $(NAME)
 
-$(NAME) :
-	@gcc -c $(FLAGS) $(INCS) $(addprefix $(SRCS_DIR), $(SRCS)) $(PRINTF_SRCS)
+$(NAME) : msg_compiling $(OBJS) $(PRINTF_OBJS)
 	@ar rcs $(NAME) $(OBJS) $(PRINTF_OBJS)
+	@ranlib $(NAME)
+	@echo ${GREEN}"Libft compiled successfully.${RESET}"
+
+$(OBJS_DIR)%.o : $(SRCS_DIR)%.c
+	@mkdir -p $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDES)
+
+$(OBJS_DIR)%.o : $(PRINTF_DIR)%.c
+	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDES)
+
+msg_compiling :
+	@echo ${CYAN}"Building the library.. $(NAME)${RESET}"
 
 clean :
+	@echo ${RED}"Removing object directory & files...${RESET}"
 	@rm -f $(OBJS) $(PRINTF_OBJS)
+	@rmdir $(OBJS_DIR)
 
 fclean : clean
+	@echo ${RED}"Removing $(NAME)${RESET}"
 	@rm -f $(NAME)
 
 re : fclean all
